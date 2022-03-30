@@ -1,0 +1,25 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.bd {
+  border: 1px solid #f00;
+}
+
+[x-cloak] {
+  display: none !important;
+}
+
+html{
+  @apply text-body font-light leading-default antialiased;
+}
+
+@layer components {
+  .container{
+    @apply max-w-screen-xl px-4;
+  }
+
+  a{
+    @apply text-brand;
+  }
+}
