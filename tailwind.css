@@ -16,11 +16,11 @@ body {
 }
 
 html {
-  @apply text-body font-light leading-default antialiased selection:bg-brand selection:text-white;
+  @apply font-light leading-default text-body antialiased selection:bg-brand selection:text-white;
 }
 
 #container {
-  @apply min-h-screen flex flex-col;
+  @apply flex min-h-screen flex-col;
 }
 
 #main {
@@ -37,7 +37,7 @@ html {
   }
 
   strong {
-    @apply text-body-dark;
+    @apply text-body-dark dark:text-white;
   }
 
   a {

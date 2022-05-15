@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -10,13 +10,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@200;300;400;600&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="./css/main.css" />
+    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
   </head>
 
   <body>
-    <div id="container">
-      <header class="header py-4 border-b">
+    <div id="container" class="dark:bg-dark dark:text-body-light">
+      <header class="header border-b py-4 dark:border-white/10">
         <div class="container">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between text-sm">
             <a href="#" class="text-brand">
               <svg viewBox="0 0 98 73" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-24">
                 <path
@@ -31,32 +32,61 @@
             <nav>
               <ul class="flex items-center space-x-8 font-semibold">
                 <li>
-                  <a href="#" class="text-brand uppercase">UZGeeks</a>
+                  <a href="#" class="uppercase text-brand hover:underline">UZGeeks</a>
                 </li>
                 <li>
-                  <a href="#" class="text-brand uppercase">Mavzular</a>
+                  <a href="#" class="uppercase text-brand hover:underline">Mavzular</a>
                 </li>
                 <li>
-                  <a href="#" class="text-brand uppercase">Safimizda</a>
+                  <a href="#" class="uppercase text-brand hover:underline">Safimizda</a>
                 </li>
               </ul>
             </nav>
 
             <ul class="flex items-center space-x-6">
               <li>
-                <button class="px-6 py-3 rounded-full border border-brand uppercase text-sm tracking-widest text-brand leading-none">Login</button>
+                <button class="rounded-full border border-brand px-6 py-3 uppercase leading-none tracking-widest text-brand">Login</button>
               </li>
               <li>
                 <svg width="1" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
-                  <path stroke="#6D6D6D" d="M.5 20V0" />
+                  <path stroke="currentColor" d="M.5 20V0" />
                 </svg>
               </li>
               <li>
-                <button class="text-brand">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                  </svg>
-                </button>
+                <div x-data="{isOpen: false}" x-on:keyup.escape="isOpen = false" class="relative">
+                  <button x-on:click="isOpen = !isOpen" class="text-brand outline-none">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                    </svg>
+                  </button>
+
+                  <ul x-cloak x-show="isOpen" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="absolute top-full right-0 w-36 rounded border bg-white shadow-lg dark:border-dark dark:bg-dark-light">
+                    <li>
+                      <button class="flex w-full items-center space-x-2 p-2 font-medium text-brand transition hover:bg-gray-100/50 dark:hover:bg-dark/60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <span>Light</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="flex w-full items-center space-x-2 p-2 font-medium transition hover:bg-gray-100/50 dark:hover:bg-dark/60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                        <span>Dark</span>
+                      </button>
+                    </li>
+                    <li>
+                      <button class="flex w-full items-center space-x-2 p-2 font-medium transition hover:bg-gray-100/50 dark:hover:bg-dark/60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <span>System</span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </li>
             </ul>
           </div>
@@ -65,38 +95,38 @@
 
       <main id="main">
         <div class="container">
-          <div class="flex flex-col items-center text-center space-y-8 py-24 pt-48">
-            <p class="text-brand tracking-widest uppercase text-xs font-semibold">IT Eventlar</p>
+          <div class="flex flex-col items-center space-y-8 py-24 pt-48 text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-brand">IT Eventlar</p>
 
-            <h1 class="text-h1 font-normal text-body-dark">UzGeeks</h1>
+            <h1 class="text-h1 font-normal text-body-dark dark:text-white">UzGeeks</h1>
 
             <p>
-              O'zbekiston IT Mutahassislari Hamjamiyati,<br /><a href="#" class="capitalize">navbatdagi event</a>
+              O'zbekiston IT Mutahassislari Hamjamiyati,<br /><a href="#" class="capitalize hover:underline">navbatdagi event</a>
               ga
             </p>
 
-            <ul class="flex items-center justify-between w-6/12 !my-16">
+            <ul class="!my-16 flex w-6/12 items-center justify-between">
               <li class="flex flex-col justify-center"><span class="text-h1">11</span>kun</li>
               <li class="flex flex-col justify-center"><span class="text-h1">16</span>soat</li>
               <li class="flex flex-col justify-center"><span class="text-h1">56</span>daqiqa</li>
               <li class="flex flex-col justify-center"><span class="text-h1">36</span>soniya qoldi</li>
             </ul>
 
-            <button class="flex items-center px-8 py-4 text-white bg-brand rounded-full space-x-3">
-              <span class="uppercase text-sm tracking-widest">Eventda qatnashing</span>
+            <button class="group flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg">
+              <span class="text-sm uppercase tracking-widest">Eventda qatnashing</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
               </svg>
             </button>
-            <span class="relative block h-20 w-px bg-body/20 !mt-40"></span>
+            <span class="relative !mt-40 block h-20 w-px bg-body/20 dark:bg-white/10"></span>
           </div>
         </div>
 
         <div class="container">
-          <div class="flex items-center justify-between -mx-4 py-24">
+          <div class="-mx-4 flex items-center justify-between py-24">
             <div class="w-6/12 px-4">
-              <div class="space-y-6 mb-12">
-                <h2 class="text-h2 font-normal text-body-dark before:content-[''] before:block before:w-8 before:h-1 before:bg-brand before:mb-8">UzGeeks nima?</h2>
+              <div class="mb-12 space-y-6">
+                <h2 class="text-h2 font-normal text-body-dark before:mb-8 before:block before:h-1 before:w-8 before:bg-brand before:content-[''] dark:text-white">UzGeeks nima?</h2>
 
                 <p><strong>UzGeeks Community</strong> — bu O‘zbekistoning hamma burchaklaridan bo‘lgan axborot texnologiylari muhandislarini faoliyatlari davomida shu sohada orttirgan bilim va tajribalari, izlanishlari, axborot texnologiyalari sohasidagi eng so‘nggi yangiliklar bilan bo‘lishish, yosh mutaxassislarga, talabalarga nazariy bilimlarni amaliyotdagi qo‘llanilishi, yangi texnologiya va metodologiyalar bilan tanishish imkonini beruvchi mutloq ochiq maydoncha.</p>
 
@@ -107,8 +137,8 @@
                 <p>Shu bilan birga, <strong>UzGeeks meetuplari</strong> onlayn tarzda ijtimoiy tarmoqlarda efirga uzatiladi. Ushbu tadbirlarda qatnashish mutloq bepul bo‘lib, xohlagan ishtirokchi o‘z shaxsiy professional tajribasidan kelib chiqqan holda biror-bir mavzu bo‘yicha taqdimot o‘tkazib berishi, yoki oddiy eshituvchi-ishtirokchi sifatida qatnashishi mumkin</p>
               </div>
 
-              <button class="flex items-center px-8 py-4 text-white bg-brand rounded-full space-x-3">
-                <span class="uppercase text-sm tracking-widest">Bizga qo'shiling</span>
+              <button class="flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg">
+                <span class="text-sm uppercase tracking-widest">Bizga qo'shiling</span>
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
@@ -117,159 +147,159 @@
             </div>
 
             <div class="w-6/12 px-4">
-              <img src="img/uzgeeks.jpg" alt="Uzgeeks community" width="550" height="803" class="rounded-lg w-full" />
+              <img src="img/uzgeeks.jpg" alt="Uzgeeks community" width="550" height="803" class="w-full rounded-lg" />
             </div>
           </div>
         </div>
 
-        <div class="py-24 container">
-          <h2 class="text-h2 pt-9 relative text-center font-normal mb-16 text-body-dark before:content-[''] before:block before:absolute before:left-1/2 before:top-0 before:w-8 before:h-1 before:bg-brand">UzGeeks mavzulari qanday tanlanadi?</h2>
+        <div class="container py-24">
+          <h2 class="relative mb-16 pt-9 text-center text-h2 font-normal text-body-dark before:absolute before:left-1/2 before:top-0 before:block before:h-1 before:w-8 before:bg-brand before:content-[''] dark:text-white">UzGeeks mavzulari qanday tanlanadi?</h2>
 
           <ul class="grid grid-cols-3 gap-x-6 gap-y-16">
-            <li>
-              <span class="w-14 h-14 mb-8 text-white flex items-center justify-center relative before:absolute before:w-full before:h-full before:bg-brand before:rotate-45 before:rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <li class="group">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </span>
               <div class="space-y-4">
-                <p class="uppercase text-sm font-semibold tracking-wider">Dasturlash</p>
+                <p class="text-sm font-semibold uppercase tracking-wider">Dasturlash</p>
                 <p>Software, Hardware Development, Front-End + Back-End dasturlash, Mobile Applications Development va boshqa yo’nalishlar.</p>
               </div>
             </li>
 
-            <li>
-              <span class="w-14 h-14 mb-8 text-white flex items-center justify-center relative before:absolute before:w-full before:h-full before:bg-brand before:rotate-45 before:rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <li class="group">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </span>
               <div class="space-y-4">
-                <p class="uppercase text-sm font-semibold tracking-wider">Tarmoq, OS Tizimlar</p>
+                <p class="text-sm font-semibold uppercase tracking-wider">Tarmoq, OS Tizimlar</p>
                 <p>System Administration, Windows, Linux, Mac OS Deveopment, CISCO va turli SWITCH boshqaruvlari va ularni sozlash bo’yicha mavzular.</p>
               </div>
             </li>
 
-            <li>
-              <span class="w-14 h-14 mb-8 text-white flex items-center justify-center relative before:absolute before:w-full before:h-full before:bg-brand before:rotate-45 before:rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <li class="group">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
               </span>
               <div class="space-y-4">
-                <p class="uppercase text-sm font-semibold tracking-wider">Elektronika va Robototexnika</p>
+                <p class="text-sm font-semibold uppercase tracking-wider">Elektronika va Robototexnika</p>
                 <p>Robototexnika yo’nalishiga aloqador mavzular, Raspberry Pi bilan hayota uchraydigan muammolarni avtomatizaciya qilish bo’yicha mavzular.</p>
               </div>
             </li>
 
-            <li>
-              <span class="w-14 h-14 mb-8 text-white flex items-center justify-center relative before:absolute before:w-full before:h-full before:bg-brand before:rotate-45 before:rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <li class="group">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </span>
               <div class="space-y-4">
-                <p class="uppercase text-sm font-semibold tracking-wider">Axborot Havfsizligi</p>
+                <p class="text-sm font-semibold uppercase tracking-wider">Axborot Havfsizligi</p>
                 <p>Security, Malware, Trojan, Social Hacking, Cracking, shu va shu kabi qo’rqinchli so’zlar qatnashgan istalgan mavzu bo’yicha chiqish qilish mumkin.</p>
               </div>
             </li>
 
-            <li>
-              <span class="w-14 h-14 mb-8 text-white flex items-center justify-center relative before:absolute before:w-full before:h-full before:bg-brand before:rotate-45 before:rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <li class="group">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
                 </svg>
               </span>
               <div class="space-y-4">
-                <p class="uppercase text-sm font-semibold tracking-wider">Design, UX/UI</p>
+                <p class="text-sm font-semibold uppercase tracking-wider">Design, UX/UI</p>
                 <p>UX, UI, Web Design, Graphic Design, Packaging Design, Brand yaratish va uni keng ommaga tanitish siyosati haqidagi mavzular yoki master classlar.</p>
               </div>
             </li>
 
-            <li>
-              <span class="w-14 h-14 mb-8 text-white flex items-center justify-center relative before:absolute before:w-full before:h-full before:bg-brand before:rotate-45 before:rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 relative" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+            <li class="group">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </span>
               <div class="space-y-4">
-                <p class="uppercase text-sm font-semibold tracking-wider">Startup</p>
+                <p class="text-sm font-semibold uppercase tracking-wider">Startup</p>
                 <p>Qiziq mavzu, loyiha bormi, uni qanday rivojlantirishni bilmayabsizmi? Shu haqida va shu yo’nalishda presentation qilishimiz mumkin.</p>
               </div>
             </li>
           </ul>
         </div>
 
-        <div class="py-24 container">
-          <div class="space-y-8 text-center mb-16">
-            <p class="text-brand tracking-widest uppercase text-xs font-semibold">22-fevral, 2022 yil</p>
+        <div class="container py-24">
+          <div class="mb-16 space-y-8 text-center">
+            <p class="text-xs font-semibold uppercase tracking-widest text-brand">22-fevral, 2022 yil</p>
 
-            <h2 class="text-h2 text-body-dark font-normal">UzGeeks Event</h2>
+            <h2 class="text-h2 font-normal text-body-dark dark:text-white">UzGeeks Event</h2>
 
             <p>Navbatdagi UzGeeks Event ishtirokchilari bilan tanishing</p>
           </div>
 
-          <ul class="grid grid-cols-3 gap-x-8 mb-12">
-            <li class="px-6 py-12 border rounded-lg text-center text-sm font-normal tracking-wide">
-              <div class="flex flex-col space-y-6 items-center">
-                <img src="img/people/suneet-chopra.jpg" alt="suneet chopra" width="126" height="126" class="rounded-full" />
+          <ul class="mb-12 grid grid-cols-3 gap-x-8">
+            <li class="group rounded-lg border px-6 py-12 text-center text-sm font-normal tracking-wide transition duration-500 hover:translate-y-4 hover:cursor-pointer hover:border-transparent hover:shadow-xl dark:border-white/10">
+              <div class="flex flex-col items-center space-y-6">
+                <img src="img/people/suneet-chopra.jpg" alt="suneet chopra" width="126" height="126" class="rounded-full border-4 border-white shadow-lg" />
 
-                <p class="space-y-1 flex flex-col items-center"><span class="text-brand tracking-widest uppercase text-xs font-medium">Suneet chopra</span><span class="font-medium">EPAM</span></p>
+                <p class="flex flex-col items-center space-y-1"><a href="#" class="text-xs font-medium uppercase tracking-widest text-brand group-hover:underline">Suneet chopra</a><span class="font-medium">EPAM</span></p>
               </div>
 
-              <span class="relative inline-block h-20 w-px bg-body/20 my-8"></span>
+              <span class="relative my-8 inline-block h-20 w-px bg-body/20 dark:bg-white/10"></span>
 
               <p class="line-clamp-2">Any mechanical keyboard enthusiasts in design? Suneet will share with her experience?</p>
             </li>
 
-            <li class="px-6 py-12 border rounded-lg text-center text-sm font-normal tracking-wide">
-              <div class="flex flex-col space-y-6 items-center">
-                <img src="img/people/cameron-williamson.jpg" alt="cameron williamson" width="126" height="126" class="rounded-full" />
+            <li class="group rounded-lg border px-6 py-12 text-center text-sm font-normal tracking-wide transition duration-500 hover:translate-y-4 hover:cursor-pointer hover:border-transparent hover:shadow-xl dark:border-white/10">
+              <div class="flex flex-col items-center space-y-6">
+                <img src="img/people/cameron-williamson.jpg" alt="cameron williamson" width="126" height="126" class="rounded-full border-4 border-white shadow-lg" />
 
-                <p class="space-y-1 flex flex-col items-center"><span class="text-brand tracking-widest uppercase text-xs font-medium">Cameron Williamson</span><span class="font-medium">Johnson&nbsp;&amp;&nbsp;Johnson</span></p>
+                <p class="flex flex-col items-center space-y-1"><a href="#" class="text-xs font-medium uppercase tracking-widest text-brand group-hover:underline">Cameron Williamson</a><span class="font-medium">Johnson&nbsp;&amp;&nbsp;Johnson</span></p>
               </div>
 
-              <span class="relative inline-block h-20 w-px bg-body/20 my-8"></span>
+              <span class="relative my-8 inline-block h-20 w-px bg-body/20 dark:bg-white/10"></span>
 
               <p class="line-clamp-2">Understanding color theory: the color wheel and finding complementary colors</p>
             </li>
 
-            <li class="px-6 py-12 border rounded-lg text-center text-sm font-normal tracking-wide">
-              <div class="flex flex-col space-y-6 items-center">
-                <img src="img/people/robert-fox.jpg" alt="robert fox" width="126" height="126" class="rounded-full" />
+            <li class="group rounded-lg border px-6 py-12 text-center text-sm font-normal tracking-wide transition duration-500 hover:translate-y-4 hover:cursor-pointer hover:border-transparent hover:shadow-xl dark:border-white/10">
+              <div class="flex flex-col items-center space-y-6">
+                <img src="img/people/robert-fox.jpg" alt="robert fox" width="126" height="126" class="rounded-full border-4 border-white shadow-lg" />
 
-                <p class="space-y-1 flex flex-col items-center"><span class="text-brand tracking-widest uppercase text-xs font-medium">Robert Fox</span><span class="font-medium">Barone LLC</span></p>
+                <p class="flex flex-col items-center space-y-1"><a href="#" class="text-xs font-medium uppercase tracking-widest text-brand group-hover:underline">Robert Fox</a><span class="font-medium">Barone LLC</span></p>
               </div>
 
-              <span class="relative inline-block h-20 w-px bg-body/20 my-8"></span>
+              <span class="relative my-8 inline-block h-20 w-px bg-body/20 dark:bg-white/10"></span>
 
               <p class="line-clamp-2">How to design a product that can grow itself 10x&nbsp;in&nbsp;a&nbsp;year?</p>
             </li>
           </ul>
 
-          <button class="flex items-center mx-auto px-8 py-4 text-white bg-brand rounded-full space-x-3">
+          <button class="mx-auto flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
 
-            <span class="uppercase text-sm tracking-widest">Avvalgi eventlarni ko'rish</span>
+            <span class="text-sm uppercase tracking-widest">Avvalgi eventlarni ko'rish</span>
           </button>
         </div>
 
         <div class="py-24">
           <div class="container">
-            <div class="space-y-8 text-center mb-16">
-              <h2 class="text-h2 text-body-dark font-normal">UzGeeks safida</h2>
+            <div class="mb-16 space-y-8 text-center">
+              <h2 class="text-h2 font-normal text-body-dark dark:text-white">UzGeeks safida</h2>
 
               <p>UzGeeks mutahassislariga ishonadigan ishxonalar</p>
             </div>
           </div>
 
-          <div class="bg-body/10 py-24">
+          <div class="bg-body/10 py-24 dark:bg-dark-light">
             <div class="container">
               <ul class="flex flex-wrap justify-center gap-12">
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.756 192.756" class="h-24 w-auto max-w-[200px]">
                     <g fill-rule="evenodd" clip-rule="evenodd">
                       <path fill="none" d="M0 0h192.756v192.756H0V0z" />
@@ -286,7 +316,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg viewBox="0 0 256 344" class="h-24 w-auto max-w-[200px]" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid">
                     <defs>
                       <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="somelogo">
@@ -301,7 +331,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1033.746 220.695" class="h-24 w-auto max-w-[200px]">
                     <path
                       d="M1033.746 99.838v-18.18h-22.576V53.395l-.76.234-21.205 6.488-.418.127v21.415h-33.469v-11.93c0-5.555 1.242-9.806 3.69-12.641 2.431-2.801 5.908-4.225 10.343-4.225 3.188 0 6.489.751 9.811 2.232l.833.372V36.321l-.392-.144c-3.099-1.114-7.314-1.675-12.539-1.675-6.585 0-12.568 1.433-17.786 4.273-5.221 2.844-9.328 6.904-12.205 12.066-2.867 5.156-4.322 11.111-4.322 17.701v13.116h-15.72v18.18h15.72v76.589h22.567V99.838h33.469v48.671c0 20.045 9.455 30.203 28.102 30.203 3.064 0 6.289-.359 9.582-1.062 3.352-.722 5.635-1.443 6.979-2.213l.297-.176v-18.348l-.918.607c-1.225.816-2.75 1.483-4.538 1.979-1.796.505-3.296.758-4.458.758-4.368 0-7.6-1.177-9.605-3.5-2.028-2.344-3.057-6.443-3.057-12.177V99.838h22.575zM866.635 160.26c-8.191 0-14.649-2.716-19.2-8.066-4.579-5.377-6.899-13.043-6.899-22.783 0-10.049 2.32-17.914 6.901-23.386 4.554-5.436 10.95-8.195 19.014-8.195 7.825 0 14.054 2.635 18.516 7.836 4.484 5.228 6.76 13.03 6.76 23.196 0 10.291-2.14 18.196-6.36 23.484-4.191 5.248-10.493 7.914-18.732 7.914m1.003-80.885c-15.627 0-28.039 4.579-36.889 13.61-8.844 9.032-13.328 21.531-13.328 37.153 0 14.838 4.377 26.773 13.011 35.468 8.634 8.698 20.384 13.104 34.921 13.104 15.148 0 27.313-4.643 36.159-13.799 8.845-9.146 13.326-21.527 13.326-36.784 0-15.07-4.205-27.094-12.502-35.731-8.301-8.641-19.977-13.021-34.698-13.021m-86.602 0c-10.63 0-19.423 2.719-26.14 8.08-6.758 5.393-10.186 12.466-10.186 21.025 0 4.449.74 8.401 2.196 11.753 1.465 3.363 3.732 6.324 6.744 8.809 2.989 2.465 7.603 5.047 13.717 7.674 5.14 2.115 8.973 3.904 11.408 5.314 2.38 1.382 4.069 2.771 5.023 4.124.927 1.324 1.397 3.136 1.397 5.372 0 6.367-4.768 9.465-14.579 9.465-3.639 0-7.79-.76-12.337-2.258a46.347 46.347 0 0 1-12.634-6.406l-.937-.672v21.727l.344.16c3.193 1.474 7.219 2.717 11.964 3.695 4.736.979 9.039 1.477 12.777 1.477 11.535 0 20.824-2.732 27.602-8.125 6.821-5.43 10.278-12.67 10.278-21.525 0-6.388-1.861-11.866-5.529-16.284-3.643-4.382-9.966-8.405-18.785-11.961-7.026-2.82-11.527-5.161-13.384-6.958-1.79-1.736-2.699-4.191-2.699-7.3 0-2.756 1.122-4.964 3.425-6.752 2.321-1.797 5.552-2.711 9.604-2.711 3.76 0 7.607.594 11.433 1.758 3.823 1.164 7.181 2.723 9.984 4.63l.922.63v-20.61l-.354-.152c-2.586-1.109-5.996-2.058-10.138-2.828-4.123-.765-7.863-1.151-11.116-1.151m-95.157 80.885c-8.189 0-14.649-2.716-19.199-8.066-4.58-5.377-6.896-13.041-6.896-22.783 0-10.049 2.319-17.914 6.901-23.386 4.55-5.436 10.945-8.195 19.013-8.195 7.822 0 14.051 2.635 18.514 7.836 4.485 5.228 6.76 13.03 6.76 23.196 0 10.291-2.141 18.196-6.361 23.484-4.191 5.248-10.49 7.914-18.732 7.914m1.006-80.885c-15.631 0-28.044 4.579-36.889 13.61-8.844 9.032-13.331 21.531-13.331 37.153 0 14.844 4.38 26.773 13.014 35.468 8.634 8.698 20.383 13.104 34.92 13.104 15.146 0 27.314-4.643 36.16-13.799 8.843-9.146 13.326-21.527 13.326-36.784 0-15.07-4.206-27.094-12.505-35.731-8.303-8.641-19.977-13.021-34.695-13.021M602.409 98.07V81.658h-22.292v94.767h22.292v-48.477c0-8.243 1.869-15.015 5.557-20.13 3.641-5.054 8.493-7.615 14.417-7.615 2.008 0 4.262.331 6.703.986 2.416.651 4.166 1.358 5.198 2.102l.937.679V81.496l-.361-.155c-2.076-.882-5.013-1.327-8.729-1.327-5.602 0-10.615 1.8-14.909 5.344-3.769 3.115-6.493 7.386-8.576 12.712h-.237zm-62.213-18.695c-10.227 0-19.349 2.193-27.108 6.516-7.775 4.333-13.788 10.519-17.879 18.385-4.073 7.847-6.141 17.013-6.141 27.235 0 8.954 2.005 17.171 5.968 24.413 3.965 7.254 9.577 12.929 16.681 16.865 7.094 3.931 15.293 5.924 24.371 5.924 10.594 0 19.639-2.118 26.891-6.295l.293-.168v-20.423l-.937.684c-3.285 2.393-6.956 4.303-10.906 5.679-3.94 1.375-7.532 2.07-10.682 2.07-8.747 0-15.769-2.737-20.866-8.133-5.108-5.403-7.698-12.99-7.698-22.537 0-9.607 2.701-17.389 8.024-23.131 5.307-5.725 12.342-8.629 20.908-8.629 7.327 0 14.467 2.481 21.222 7.381l.935.679V84.371l-.302-.17c-2.542-1.423-6.009-2.598-10.313-3.489-4.286-.889-8.478-1.337-12.461-1.337m-66.481 2.284h-22.292v94.766h22.292V81.659zm-10.918-40.371c-3.669 0-6.869 1.249-9.498 3.724-2.64 2.482-3.979 5.607-3.979 9.295 0 3.63 1.323 6.698 3.938 9.114 2.598 2.409 5.808 3.63 9.54 3.63 3.731 0 6.953-1.221 9.582-3.626 2.646-2.42 3.988-5.487 3.988-9.118 0-3.559-1.306-6.652-3.879-9.195-2.571-2.538-5.833-3.824-9.692-3.824m-55.62 33.379v101.758h22.75V44.189H398.44l-40.022 98.221-38.839-98.221H286.81v132.235h21.379V74.657h.734l41.013 101.768h16.134l40.373-101.758h.734z"
@@ -314,7 +344,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 426.4 82.5" class="h-24 w-auto max-w-[200px]">
                     <style>
                       .st0 {
@@ -335,7 +365,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="5.321 5.467 1010.319 228.027" class="h-24 w-auto max-w-[200px]">
                     <path
                       d="M856.754 160.936V78.593c0-11.261 5.639-16.888 15.668-16.888h10.017c9.336 0 12.504 2.296 15.673 9.505l18.464 45.572 18.661-45.572c3.348-7.749 7.028-9.505 15.126-9.505h9.849c10.562 0 16.195 5.627 16.195 16.888v82.342c0 10.736-3.702 16.375-13.719 16.375h-5.634c-9.685 0-13.731-5.639-13.731-16.375v-48.718l-11.958 33.411c-1.581 4.406-1.768 8.621-14.958 8.621-13.197 0-12.848-4.053-14.778-8.621l-11.784-32.027v47.333c0 10.736-3.522 16.375-13.725 16.375h-5.639c-9.686.002-13.727-5.637-13.727-16.373m-47.432-26.77c0 11.998-9.168 20.051-21.02 20.051-8.543 0-14.058-4.479-14.058-11.396 0-11.56 15.589-16.359 27.321-16.651h7.756v7.996zm-20.097-74.542c-22.774 0-44.62 10.929-44.62 25.324 0 17.896 22.155 17.451 22.155 17.451 2.403-9.685 10.377-14.643 20.737-14.643 15.932 0 21.824 7.794 21.824 19.032h-7.783c-45.589 0-62.753 18.183-62.753 38.92 0 20.046 16.759 33.456 38.808 33.456 15.38 0 30.107-5.65 32.876-16.428 1.407 8.239 9.15 15.539 19.415 15.539 9.128 0 13.455-3.102 13.855-4.216v-69.708c.001-28.587-19.263-44.727-54.514-44.727m-202.29 74.542c0 11.998-9.162 20.051-21.024 20.051-8.531 0-14.058-4.479-14.058-11.396 0-11.56 15.594-16.359 27.327-16.651h7.755v7.996zm-20.091-74.542c-22.774 0-44.632 10.929-44.632 25.324 0 17.896 22.161 17.451 22.161 17.451 2.392-9.685 10.372-14.643 20.749-14.643 15.914 0 21.812 7.794 21.812 19.032h-7.789c-45.577 0-62.752 18.183-62.752 38.92 0 20.046 16.764 33.456 38.812 33.456 15.375 0 30.096-5.65 32.876-16.428 1.396 8.239 9.146 15.539 19.421 15.539 9.117 0 13.444-3.102 13.844-4.216v-69.708c.001-28.587-19.256-44.727-54.502-44.727m65.12 102.901v-1.592c0-10.197 3.512-13.895 9.319-20.215l43.27-49.094h-35.706c-10.202 0-15.493-3.703-15.493-13.72v-1.592c0-9.668 5.291-13.703 15.493-13.703h63.692c12.836 0 17.94 6.849 17.94 13.703v1.767c0 10.011-3.687 14.063-9.319 20.056l-44.17 49.077h39.066c10.202 0 15.48 3.878 15.48 13.9v1.412c0 9.686-5.278 13.9-15.48 13.9h-66.32c-12.674.002-17.772-7.043-17.772-13.899m-233.238-1.589v-82.86c0-10.912 5.104-16.371 14.772-16.371h5.099c10.208 0 15.486 5.458 15.486 16.371v26.382h36.428V78.076c0-10.912 5.098-16.371 14.767-16.371h5.284c10.028 0 15.301 5.458 15.301 16.371v82.86c0 10.736-5.272 16.375-15.301 16.375h-5.284c-9.669 0-14.767-5.639-14.767-16.375V134.03h-36.428v26.906c0 10.736-5.278 16.375-15.486 16.375h-5.099c-9.667 0-14.772-5.639-14.772-16.375m-108.204-5.448c0-8.446 10.552-17.597 11.615-16.725 7.378 6.703 21.644 13.202 33.776 13.202 10.906 0 15.831-3.168 15.831-8.97 0-7.041-8.965-7.041-20.417-9.506-18.993-3.877-38.172-11.963-38.172-35.532 0-23.394 17.237-37.833 48.565-37.833 29.911 0 42.938 10.377 42.938 21.643 0 9.854-11.801 18.29-12.499 17.598-7.563-7.023-19.353-12.324-30.085-12.324-10.208 0-15.307 3.151-15.307 8.79 0 6.697 9.145 6.179 21.104 8.807 22.341 4.918 39.409 14.598 39.409 35.555 0 24.801-17.068 38.689-51.368 38.689-33.431.001-45.39-11.435-45.39-23.394M999.725 74.975h2.442c1.536 0 2.363-.703 2.363-1.862 0-1.289-.827-1.908-2.442-1.908h-2.363v3.77zm4.103 6.466l-2.527-3.607h-1.496v3.191c0 1.12-.58 1.784-1.7 1.784h-.54c-1.074 0-1.654-.833-1.654-2.195V70.333c0-1.413.748-2.155 2.031-2.155h4.435c3.939 0 6.05 1.536 6.05 4.688 0 2.195-1.199 3.731-3.399 4.266l3.315 4.351c.168.253-.951 1.412-2.234 1.412-.705-.002-1.623-.339-2.281-1.454m9.156-5.925c0-6.668-4.683-11.52-11.188-11.52-6.669 0-11.148 4.767-11.148 11.475 0 6.64 4.643 11.525 11.193 11.525 6.629 0 11.143-4.767 11.143-11.48m-24.986 0c0-8.042 5.757-13.968 13.844-13.968 8.12 0 13.799 5.802 13.799 13.883s-5.764 14.013-13.844 14.013c-8.166 0-13.799-5.802-13.799-13.928"
@@ -354,7 +384,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1219.547 1225.016" class="h-24 w-auto max-w-[200px]">
                     <path
                       fill="#E0E0E0"
@@ -379,7 +409,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 596 194.5" class="h-24 w-auto max-w-[200px]">
                     <style>
                       .st0 {
@@ -404,7 +434,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg viewBox="163.5 263.1 285 85.8" class="h-24 w-auto max-w-[200px]" xmlns="http://www.w3.org/2000/svg">
                     <g clip-rule="evenodd" fill-rule="evenodd">
                       <path d="m340.3 330.2c-16.5 12.2-40.5 18.7-61.2 18.7-29 0-55-10.7-74.8-28.5-1.5-1.4-.2-3.3 1.7-2.2 21.3 12.4 47.6 19.8 74.8 19.8 18.3 0 38.5-3.8 57.1-11.7 2.8-1.1 5.1 1.9 2.4 3.9z" fill="#f90" />
@@ -416,7 +446,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2000 1556" class="h-24 w-auto max-w-[200px]">
                     <defs>
                       <style>
@@ -449,7 +479,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-24 w-auto max-w-[200px]">
                     <g fill="none">
                       <path d="M0 18.338C0 8.216 8.474 0 18.92 0h218.16C247.53 0 256 8.216 256 18.338v219.327C256 247.79 247.53 256 237.08 256H18.92C8.475 256 0 247.791 0 237.668V18.335z" fill="#069" />
@@ -458,7 +488,7 @@
                   </svg>
                 </li>
 
-                <li class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500">
+                <li class="opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 39.4 48.3" class="h-24 w-auto max-w-[200px]">
                     <style>
                       .stupslogo {
@@ -482,17 +512,17 @@
           </div>
         </div>
 
-        <div class="py-24 container">
-          <div class="space-y-8 text-center mx-auto mb-16 max-w-xl">
-            <h2 class="text-h2 text-body-dark font-normal">A'zo bo'ling</h2>
+        <div class="container py-24">
+          <div class="mx-auto mb-16 max-w-xl space-y-8 text-center">
+            <h2 class="text-h2 font-normal text-body-dark dark:text-white">A'zo bo'ling</h2>
 
             <p>UzGeeks yangiliklaridan habardor bo’lib turish, bizga a’zo bo’ling, bekorchi habarlar bilan sizni bezovta qilmaymiz 😉</p>
           </div>
 
-          <form class="subscribe-f max-w-xl mx-auto relative border rounded-full flex items-center space-x-4 pr-px">
-            <input type="text" name="subscribe-f-input" id="subscribe-f-input" class="px-6 py-4 flex-grow rounded-full" placeholder="Email manzilingizni kiriting" />
+          <form class="subscribe-f relative mx-auto flex max-w-xl items-center space-x-4 rounded-full pr-px dark:border-0">
+            <input type="text" name="subscribe-f-input" id="subscribe-f-input" class="flex-grow rounded-full border border-b-4 px-6 py-4 outline-none transition focus:shadow-lg" placeholder="Email manzilingizni kiriting" />
 
-            <button name="subscribe-f-submit" id="subscribe-f-submit" class="text-white w-[60px] h-[60px] flex items-center justify-center bg-brand rounded-full uppercase text-sm tracking-widest p-3 flex-shrink-0">
+            <button name="subscribe-f-submit" id="subscribe-f-submit" class="flex h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full bg-brand p-3 text-sm uppercase tracking-widest text-white outline-none transition duration-500 focus:scale-110 focus:shadow-lg">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6" />
               </svg>
@@ -502,61 +532,39 @@
       </main>
 
       <footer id="footer" class="bg-body/10 py-24">
-        <div class="container text-center space-y-8">
+        <div class="container space-y-8 text-center">
           <p>&copy;&nbsp;2022, Barcha huquqlar himoyalangan, UzGeeks.</p>
 
           <ul class="flex items-center justify-center space-x-4">
             <li>
-              <a href="#" class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500 inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="126.445 2.281 589 589" class="w-auto h-10">
-                  <circle cx="420.945" cy="296.781" r="294.5" fill="#3c5a9a" />
-                  <path d="M516.704 92.677h-65.239c-38.715 0-81.777 16.283-81.777 72.402.189 19.554 0 38.281 0 59.357H324.9v71.271h46.174v205.177h84.847V294.353h56.002l5.067-70.117h-62.531s.14-31.191 0-40.249c0-22.177 23.076-20.907 24.464-20.907 10.981 0 32.332.032 37.813 0V92.677h-.032z" fill="#fff" />
-                </svg>
-              </a>
-            </li>
-
-            <li>
-              <a href="#" class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500 inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 .03 2498 2502.47" class="w-auto h-16">
+              <a href="#" class="group inline-block opacity-50 grayscale transition duration-500 hover:opacity-100 hover:shadow-lg hover:grayscale-0">
+                <svg viewBox="0 0 561 389" fill="none" class="h-9 w-auto" xmlns="http://www.w3.org/2000/svg">
                   <path
-                    d="m0 1864.11v.11c1.5 55.5 2 111.32 11.32 166.47 9.92 58.35 24.1 115.25 51.15 168.21q54.86 107.52 150.21 181.66c45.52 35.5 95.25 63.69 150.3 81.47 80.26 25.89 163.07 35.81 247.09 36.3 52.42.33 104.81 1.64 157.25 1.42 380.82-1.6 761.65 2.75 1142.49-2.35 50.53-.68 100.24-6.85 149.84-15.92 95.06-17.4 179.07-58 250.95-122.09 83.77-74.71 140.29-166.16 165.81-276.52 16.69-72.14 20.87-145.32 21.58-218.77v-14.65c0-5.68-2.16-1247.91-2.36-1264.33-.55-45.1-3.88-89.87-12.33-134.25-10.29-54.08-24.82-106.78-50.71-155.7-27.35-51.7-61.6-98.17-104-138.79-64.89-62.23-139.78-106.23-227-129.51-78.74-21-159.07-25.68-240-25.6a2.45 2.45 0 0 1 -.45-1.24h-1224.74c0 .42 0 .83-.07 1.24-45.93.84-91.92.49-137.61 6.16-50.05 6.22-99.63 15.59-147 33.09-74.62 27.6-139.46 70.59-194.84 128-62.75 65-107 140.22-130.44 227.79-20.95 78.13-25.51 157.81-25.62 238.06"
-                    fill="none"
+                    d="m292.915 387.827-114.927-2.101c-37.211-.732-74.514.729-110.995-6.856C11.496 367.537 7.565 311.968 3.45 265.357c-5.669-65.531-3.474-132.25 7.223-197.233C16.713 31.66 40.479 9.904 77.232 7.536c124.07-8.592 248.965-7.574 372.76-3.565 13.074.367 26.238 2.376 39.13 4.662 63.637 11.151 65.189 74.123 69.314 127.133 4.114 53.558 2.377 107.39-5.486 160.583-6.308 44.042-18.378 80.975-69.314 84.541-63.82 4.662-126.175 8.416-190.174 7.221.003-.284-.365-.284-.547-.284Zm-67.566-111.502c48.093-27.603 95.269-54.747 143.088-82.165-48.184-27.604-95.27-54.747-143.088-82.165v164.33Z"
+                    fill="#f00"
                   />
-                  <path d="m0 .79h2498v2498h-2498z" fill="none" />
-                  <path d="m1293.24 1938.65-409.54-7.49c-132.6-2.61-265.53 2.6-395.53-24.44-197.76-40.4-211.77-238.49-226.43-404.65-20.2-233.6-12.38-471.44 25.74-703.09 21.52-129.98 106.21-207.54 237.18-215.98 442.12-30.63 887.18-27 1328.32-12.71 46.59 1.31 93.5 8.47 139.44 16.62 226.77 39.75 232.3 264.23 247 453.2 14.66 190.92 8.47 382.82-19.55 572.44-22.48 157-65.49 288.66-247 301.37-227.42 16.62-449.62 30-677.68 25.74.01-1.01-1.3-1.01-1.95-1.01zm-240.77-397.48c171.38-98.4 339.49-195.16 509.89-292.9-171.7-98.4-339.49-195.16-509.89-292.9z" fill="#f00" />
                 </svg>
               </a>
             </li>
 
             <li>
-              <a href="#" class="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition duration-500 inline-block">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="w-auto h-10">
-                  <style>
-                    .st0 {
-                      fill: url(#path2995-1-0_1_);
-                    }
-                    .st1 {
-                      fill: #c8daea;
-                    }
-                    .st2 {
-                      fill: #a9c9dd;
-                    }
-                    .st3 {
-                      fill: url(#path2991_1_);
-                    }
-                  </style>
-                  <linearGradient id="path2995-1-0_1_" gradientUnits="userSpaceOnUse" x1="-683.305" y1="534.845" x2="-693.305" y2="511.512" gradientTransform="matrix(6 0 0 -6 4255 3247)">
-                    <stop offset="0" stop-color="#37aee2" />
-                    <stop offset="1" stop-color="#1e96c8" />
-                  </linearGradient>
-                  <path id="path2995-1-0" class="st0" d="M240 120c0 66.3-53.7 120-120 120S0 186.3 0 120 53.7 0 120 0s120 53.7 120 120z" />
-                  <path id="path2993" class="st1" d="M98 175c-3.9 0-3.2-1.5-4.6-5.2L82 132.2 152.8 88l8.3 2.2-6.9 18.8L98 175z" />
-                  <path id="path2989" class="st2" d="M98 175c3 0 4.3-1.4 6-3 2.6-2.5 36-35 36-35l-20.5-5-19 12-2.5 30v1z" />
+              <a href="#" class="inline-block opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" class="h-9 w-auto rounded bg-[#26a5e4]">
+                  <path id="path2993" fill="#c8daea" d="M98 175c-3.9 0-3.2-1.5-4.6-5.2L82 132.2 152.8 88l8.3 2.2-6.9 18.8L98 175z" />
+                  <path id="path2989" fill="#a9c9dd" d="M98 175c3 0 4.3-1.4 6-3 2.6-2.5 36-35 36-35l-20.5-5-19 12-2.5 30v1z" />
                   <linearGradient id="path2991_1_" gradientUnits="userSpaceOnUse" x1="128.991" y1="118.245" x2="153.991" y2="78.245" gradientTransform="matrix(1 0 0 -1 0 242)">
                     <stop offset="0" stop-color="#eff7fc" />
                     <stop offset="1" stop-color="#fff" />
                   </linearGradient>
-                  <path id="path2991" class="st3" d="M100 144.4l48.4 35.7c5.5 3 9.5 1.5 10.9-5.1L179 82.2c2-8.1-3.1-11.7-8.4-9.3L55 117.5c-7.9 3.2-7.8 7.6-1.4 9.5l29.7 9.3L152 93c3.2-2 6.2-.9 3.8 1.3L100 144.4z" />
+                  <path id="path2991" fill="url(#path2991_1_)" d="M100 144.4l48.4 35.7c5.5 3 9.5 1.5 10.9-5.1L179 82.2c2-8.1-3.1-11.7-8.4-9.3L55 117.5c-7.9 3.2-7.8 7.6-1.4 9.5l29.7 9.3L152 93c3.2-2 6.2-.9 3.8 1.3L100 144.4z" />
+                </svg>
+              </a>
+            </li>
+
+            <li>
+              <a href="#" class="inline-block opacity-50 grayscale transition duration-500 hover:opacity-100 hover:grayscale-0">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="126.445 2.281 589 589" class="h-9 w-auto rounded bg-[#3c5a9a]">
+                  <path d="M516.704 92.677h-65.239c-38.715 0-81.777 16.283-81.777 72.402.189 19.554 0 38.281 0 59.357H324.9v71.271h46.174v205.177h84.847V294.353h56.002l5.067-70.117h-62.531s.14-31.191 0-40.249c0-22.177 23.076-20.907 24.464-20.907 10.981 0 32.332.032 37.813 0V92.677h-.032z" fill="#fff" />
                 </svg>
               </a>
             </li>
@@ -564,6 +572,5 @@
         </div>
       </footer>
     </div>
-    <!-- <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
   </body>
 </html>
