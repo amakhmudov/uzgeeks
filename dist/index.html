@@ -13,13 +13,20 @@
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
   </head>
 
-  <body x-data="{'darkMode': false}" x-init="darkMode = JSON.parse(localStorage.getItem('darkMode')); $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))" x-bind:class="darkMode ? 'dark' : ''">
+  <body
+    x-data="{'darkMode': false, 'menuOpen' : false, 'scrolledTop' : false}"
+    x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
+            $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)));
+            window.pageYOffset >= 250 ? scrolledTop = true : scrolledTop = false"
+    @scroll.window="window.pageYOffset >= 250 ? scrolledTop = true : scrolledTop = false"
+    x-bind:class="darkMode ? 'dark' : ''"
+  >
     <div id="container" class="dark:bg-dark dark:text-body-light">
-      <header class="header border-b py-4 dark:border-white/10">
+      <header x-bind:class="scrolledTop ? 'py-0' : 'py-4'" class="header fixed z-50 w-full border-b border-brand/20 bg-white/90 shadow-2xl shadow-brand/10 transition-all duration-300 dark:border-white/10 dark:bg-dark-light/90 dark:shadow-dark">
         <div class="container">
-          <div class="flex items-center justify-between text-sm">
-            <a href="#" class="text-brand">
-              <svg viewBox="0 0 98 73" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-24">
+          <div class="flex flex-wrap items-center justify-between text-sm">
+            <a href="#" x-bind:class="scrolledTop ? 'scale-[75%]' : ''" class="text-brand transition">
+              <svg viewBox="0 0 98 73" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-20 sm:w-24">
                 <path
                   fill-rule="evenodd"
                   clip-rule="evenodd"
@@ -29,26 +36,26 @@
               </svg>
             </a>
 
-            <nav>
+            <nav x-bind:class="!menuOpen ? 'hidden' : ''" class="transition dark:bg-opacity-90 sm:block sm-down:absolute sm-down:inset-x-0 sm-down:top-[calc(100%+1px)] sm-down:bg-white/90 sm-down:p-4 sm-down:shadow-2xl dark:sm-down:bg-dark/90">
               <h2 class="sr-only">Main navigation</h2>
-              <ul class="flex items-center space-x-8 font-semibold">
+              <ul class="flex items-center space-x-8 font-semibold sm-down:justify-center">
                 <li>
-                  <a href="#" class="uppercase text-brand hover:underline">UZGeeks</a>
+                  <a aria-role="button" x-on:click="menuOpen = false" href="#uzgeeks" class="uppercase text-brand hover:underline">UZGeeks</a>
                 </li>
                 <li>
-                  <a href="#" class="uppercase text-brand hover:underline">Mavzular</a>
+                  <a aria-role="button" x-on:click="menuOpen = false" href="#mavzular" class="uppercase text-brand hover:underline">Mavzular</a>
                 </li>
                 <li>
-                  <a href="#" class="uppercase text-brand hover:underline">Safimizda</a>
+                  <a aria-role="button" x-on:click="menuOpen = false" href="#safimizda" class="uppercase text-brand hover:underline">Safimizda</a>
                 </li>
               </ul>
             </nav>
 
             <ul class="flex items-center space-x-6">
-              <li>
+              <li class="hidden">
                 <button class="rounded-full border border-brand px-6 py-3 uppercase leading-none tracking-widest text-brand">Login</button>
               </li>
-              <li>
+              <li class="hidden">
                 <svg width="1" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
                   <path stroke="currentColor" d="M.5 20V0" />
                 </svg>
@@ -56,7 +63,7 @@
               <li>
                 <div x-data="{isOpen: false}" x-on:keyup.escape="isOpen = false" class="relative">
                   <button x-on:click="isOpen = !isOpen" class="text-brand outline-none">
-                    <svg x-bind:class="darkMode ? 'hidden' : ''" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <svg x-bind:class="darkMode ? 'hidden' : ''" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
 
@@ -67,7 +74,7 @@
 
                   <ul x-cloak x-show="isOpen" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="absolute top-full right-0 w-40 rounded border bg-white py-2 shadow-lg dark:border-dark dark:bg-dark-light">
                     <li>
-                      <button x-on:click="darkMode = false" x-bind:class="darkMode ? '' : 'text-brand'" class="flex w-full items-center space-x-2 py-2 px-3 font-medium transition hover:bg-gray-100 dark:hover:bg-dark/60">
+                      <button x-on:click="darkMode = false, isOpen = false" x-bind:class="darkMode ? '' : 'text-brand'" class="flex w-full items-center space-x-2 py-2 px-3 font-medium transition hover:bg-gray-100 dark:hover:bg-dark/60">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                         </svg>
@@ -75,7 +82,7 @@
                       </button>
                     </li>
                     <li>
-                      <button x-on:click="darkMode = true" x-bind:class="darkMode ? 'text-brand' : ''" class="flex w-full items-center space-x-2 py-2 px-3 font-medium transition hover:bg-gray-100 dark:hover:bg-dark/60">
+                      <button x-on:click="darkMode = true, isOpen = false" x-bind:class="darkMode ? 'text-brand' : ''" class="flex w-full items-center space-x-2 py-2 px-3 font-medium transition hover:bg-gray-100 dark:hover:bg-dark/60">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                           <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                         </svg>
@@ -85,6 +92,22 @@
                   </ul>
                 </div>
               </li>
+              <li class="sm:hidden">
+                <svg width="1" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
+                  <path stroke="currentColor" d="M.5 20V0" />
+                </svg>
+              </li>
+              <li class="sm:hidden">
+                <button x-on:click="menuOpen = !menuOpen" class="text-brand outline-none">
+                  <svg x-bind:class="menuOpen ? 'hidden scale-y-0' : ''" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
+                  </svg>
+
+                  <svg x-bind:class="!menuOpen ? 'hidden scale-y-0' : ''" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </li>
             </ul>
           </div>
         </div>
@@ -92,7 +115,7 @@
 
       <main id="main">
         <section class="container">
-          <div class="flex flex-col items-center space-y-8 py-24 pt-48 text-center">
+          <div class="pt- flex flex-col items-center space-y-8 py-24 pt-72 text-center">
             <p class="text-xs font-semibold uppercase tracking-widest text-brand">IT Eventlar</p>
 
             <h1 class="text-h1 font-normal text-body-dark dark:text-white">UzGeeks</h1>
@@ -119,7 +142,7 @@
           </div>
         </section>
 
-        <section class="container">
+        <section id="uzgeeks" class="container">
           <div class="-mx-4 flex flex-wrap items-center justify-between py-24">
             <div class="w-full px-4 lg:w-6/12">
               <div class="mb-12 space-y-6 sm-down:text-center">
@@ -136,13 +159,13 @@
                 <p>Shu bilan birga, <strong>UzGeeks meetuplari</strong> onlayn tarzda ijtimoiy tarmoqlarda efirga uzatiladi. Ushbu tadbirlarda qatnashish mutloq bepul bo‘lib, xohlagan ishtirokchi o‘z shaxsiy professional tajribasidan kelib chiqqan holda biror-bir mavzu bo‘yicha taqdimot o‘tkazib berishi, yoki oddiy eshituvchi-ishtirokchi sifatida qatnashishi mumkin</p>
               </div>
 
-              <button class="flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg dark:border-dark sm-down:mx-auto">
+              <a href="https://t.me/UzGeeksGroup" target="_blank" class="inline-flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg dark:border-dark sm-down:mx-auto">
                 <span class="text-sm uppercase tracking-widest">Bizga qo'shiling</span>
 
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"></path>
                 </svg>
-              </button>
+              </a>
             </div>
 
             <div class="w-full px-4 lg:w-6/12 lg-down:hidden">
@@ -151,13 +174,13 @@
           </div>
         </section>
 
-        <section class="container py-24">
+        <section id="mavzular" class="container py-24">
           <h2 class="relative mb-16 pt-9 text-center text-h2 font-normal text-body-dark before:absolute before:left-1/2 before:top-0 before:block before:h-1 before:w-8 before:bg-brand before:content-[''] dark:text-white">UzGeeks mavzulari qanday tanlanadi?</h2>
 
           <ul class="grid grid-cols-1 gap-x-6 gap-y-16 sm:grid-cols-2 lg:grid-cols-3">
             <li class="group sm-down:text-center">
-              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90 sm-down:mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow transition before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:translate-y-2 group-hover:before:scale-90 sm-down:mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5 transition duration-300 group-hover:-translate-y-1 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               </span>
@@ -168,8 +191,8 @@
             </li>
 
             <li class="group sm-down:text-center">
-              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90 sm-down:mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow transition before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:translate-y-2 group-hover:before:scale-90 sm-down:mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5 transition duration-300 group-hover:-translate-y-1 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                 </svg>
               </span>
@@ -180,8 +203,8 @@
             </li>
 
             <li class="group sm-down:text-center">
-              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90 sm-down:mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow transition before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:translate-y-2 group-hover:before:scale-90 sm-down:mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5 transition duration-300 group-hover:-translate-y-1 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
                 </svg>
               </span>
@@ -192,8 +215,8 @@
             </li>
 
             <li class="group sm-down:text-center">
-              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90 sm-down:mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow transition before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:translate-y-2 group-hover:before:scale-90 sm-down:mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5 transition duration-300 group-hover:-translate-y-1 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </span>
@@ -204,8 +227,8 @@
             </li>
 
             <li class="group sm-down:text-center">
-              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90 sm-down:mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow transition before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:translate-y-2 group-hover:before:scale-90 sm-down:mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5 transition duration-300 group-hover:-translate-y-1 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
                 </svg>
               </span>
@@ -216,8 +239,8 @@
             </li>
 
             <li class="group sm-down:text-center">
-              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:before:rotate-90 sm-down:mx-auto">
-                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <span class="relative mb-8 flex h-14 w-14 items-center justify-center text-white drop-shadow transition before:absolute before:h-full before:w-full before:rotate-45 before:rounded-xl before:bg-brand before:transition before:duration-500 group-hover:translate-y-2 group-hover:before:scale-90 sm-down:mx-auto">
+                <svg xmlns="http://www.w3.org/2000/svg" class="relative h-5 w-5 transition duration-300 group-hover:-translate-y-1 group-hover:scale-125" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                 </svg>
               </span>
@@ -282,17 +305,19 @@
             </li>
           </ul>
 
-          <button class="mx-auto flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg dark:border-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
+          <p class="text-center">
+            <a href="https://t.me/UzGeeksGroup" target="_blank" class="inline-flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white transition duration-500 hover:translate-y-1 hover:shadow-lg dark:border-dark">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
 
-            <span class="text-sm uppercase tracking-widest">Avvalgi eventlarni ko'rish</span>
-          </button>
+              <span class="text-sm uppercase tracking-widest">Avvalgi eventlarni ko'rish</span>
+            </a>
+          </p>
         </section>
 
-        <section class="border-t border-b bg-body/10 py-24 dark:border-t-white/10 dark:border-b-white/10 dark:bg-dark-light">
+        <section id="safimizda" class="border-t border-b bg-body/10 py-24 dark:border-t-white/10 dark:border-b-white/10 dark:bg-dark-light">
           <div class="container">
             <div class="mb-16 space-y-8 text-center">
               <h2 class="text-h2 font-normal text-body-dark dark:text-white">UzGeeks safida</h2>
@@ -520,7 +545,15 @@
             <p>UzGeeks yangiliklaridan habardor bo’lib turish, bizga a’zo bo’ling, bekorchi habarlar bilan sizni bezovta qilmaymiz 😉</p>
           </div>
 
-          <form class="subscribe-f relative mx-auto flex max-w-xl items-center space-x-4 rounded-full pr-px dark:border-0">
+          <p class="text-center">
+            <a href="https://t.me/UzGeeksGroup" target="_blank" class="inline-flex h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full bg-brand p-3 text-sm uppercase tracking-widest text-white shadow outline-none transition duration-1000 hover:scale-110 hover:shadow-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+              </svg>
+            </a>
+          </p>
+
+          <form class="subscribe-f relative mx-auto flex hidden max-w-xl items-center space-x-4 rounded-full pr-px dark:border-0">
             <input type="text" name="subscribe-f-input" id="subscribe-f-input" class="flex-grow rounded-full border border-b-4 px-6 py-4 outline-none transition focus:shadow-lg dark:border-dark dark:bg-dark-light" placeholder="Email manzilingizni kiriting" />
 
             <button name="subscribe-f-submit" id="subscribe-f-submit" class="flex h-[60px] w-[60px] flex-shrink-0 items-center justify-center rounded-full bg-brand p-3 text-sm uppercase tracking-widest text-white outline-none transition duration-500 focus:scale-110 focus:shadow-lg">
@@ -534,7 +567,7 @@
 
       <footer id="footer" class="border-t bg-body/10 py-24 dark:border-t-white/10">
         <div class="container space-y-8 text-center">
-          <p>&copy;&nbsp;2022, Barcha huquqlar himoyalangan, UzGeeks.</p>
+          <p class="x-data">&copy;&nbsp;<span x-text="new Date().getFullYear()">2022</span>, Barcha huquqlar himoyalangan, UzGeeks.</p>
 
           <ul class="flex items-center justify-center space-x-4">
             <li>
