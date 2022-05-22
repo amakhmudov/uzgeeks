@@ -41,6 +41,13 @@ module.exports = {
             lineHeight: "1.239",
           },
         ],
+        h3: [
+          "1.875rem",
+          {
+            letterSpacing: "-0.4px",
+            lineHeight: "1.239",
+          },
+        ],
       },
       colors: {
         brand: "#2bc1c5",
