@@ -1303,6 +1303,10 @@ html::selection {
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+body {
+  background-image: url("data:image/svg+xml,%3Csvg width='85' height='85' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232bc1c5' fill-opacity='0.05' fill-rule='evenodd'%3E%3Ccircle cx='1' cy='1' r='1'/%3E%3Ccircle cx='0' cy='0' r='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+
 #container {
   display: flex;
   min-height: 100vh;
