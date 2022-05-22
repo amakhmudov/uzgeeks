@@ -577,14 +577,6 @@ p {
   right: 0px;
 }
 
-.top-0 {
-  top: 0px;
-}
-
-.left-0 {
-  left: 0px;
-}
-
 .right-1 {
   right: 0.25rem;
 }
@@ -597,17 +589,22 @@ p {
   z-index: 50;
 }
 
-.m-auto {
-  margin: auto;
-}
-
 .\!m-0 {
   margin: 0px !important;
+}
+
+.m-auto {
+  margin: auto;
 }
 
 .\!my-16 {
   margin-top: 4rem !important;
   margin-bottom: 4rem !important;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .-mx-4 {
@@ -623,11 +620,6 @@ p {
 .my-8 {
   margin-top: 2rem;
   margin-bottom: 2rem;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .\!mt-40 {
@@ -648,10 +640,6 @@ p {
 
 .mb-6 {
   margin-bottom: 1.5rem;
-}
-
-.mb-3 {
-  margin-bottom: 0.75rem;
 }
 
 .block {
@@ -694,6 +682,10 @@ p {
   height: 5rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-60 {
   height: 15rem;
 }
@@ -712,10 +704,6 @@ p {
 
 .h-9 {
   height: 2.25rem;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .w-full {
@@ -746,6 +734,10 @@ p {
   width: 1px;
 }
 
+.w-screen {
+  width: 100vw;
+}
+
 .w-14 {
   width: 3.5rem;
 }
@@ -758,8 +750,8 @@ p {
   width: 60px;
 }
 
-.w-screen {
-  width: 100vw;
+.max-w-\[500px\] {
+  max-width: 500px;
 }
 
 .max-w-\[200px\] {
@@ -768,22 +760,6 @@ p {
 
 .max-w-xl {
   max-width: 36rem;
-}
-
-.max-w-screen-sm {
-  max-width: 641px;
-}
-
-.max-w-\[300px\] {
-  max-width: 300px;
-}
-
-.max-w-\[400px\] {
-  max-width: 400px;
-}
-
-.max-w-\[500px\] {
-  max-width: 500px;
 }
 
 .flex-shrink-0 {
@@ -890,6 +866,12 @@ p {
   margin-left: calc(0.75rem * calc(1 - var(--tw-space-x-reverse)));
 }
 
+.space-y-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-y-reverse: 0;
+  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
+  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
+}
+
 .space-y-6 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-y-reverse: 0;
   margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
@@ -912,18 +894,6 @@ p {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
   margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
-}
-
-.space-y-3 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.75rem * var(--tw-space-y-reverse));
-}
-
-.space-y-3\.5 > :not([hidden]) ~ :not([hidden]) {
-  --tw-space-y-reverse: 0;
-  margin-top: calc(0.875rem * calc(1 - var(--tw-space-y-reverse)));
-  margin-bottom: calc(0.875rem * var(--tw-space-y-reverse));
 }
 
 .overflow-y-auto {
@@ -994,6 +964,10 @@ p {
   background-color: rgb(109 109 109 / 0.2);
 }
 
+.bg-heading\/95 {
+  background-color: rgb(42 52 62 / 0.95);
+}
+
 .bg-body\/10 {
   background-color: rgb(109 109 109 / 0.1);
 }
@@ -1008,38 +982,17 @@ p {
   background-color: rgb(60 90 154 / var(--tw-bg-opacity));
 }
 
-.bg-heading\/95 {
-  background-color: rgb(42 52 62 / 0.95);
-}
-
-.bg-gray-200 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
-.bg-dark\/95 {
-  background-color: rgb(31 33 35 / 0.95);
-}
-
-.bg-dark\/90 {
-  background-color: rgb(31 33 35 / 0.9);
-}
-
-.bg-heading\/90 {
-  background-color: rgb(42 52 62 / 0.9);
-}
-
 .object-cover {
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.p-3 {
-  padding: 0.75rem;
-}
-
 .p-6 {
   padding: 1.5rem;
+}
+
+.p-3 {
+  padding: 0.75rem;
 }
 
 .py-0 {
@@ -1108,18 +1061,6 @@ p {
   text-align: center;
 }
 
-.font-sans {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}
-
-.font-serif {
-  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-}
-
-.font-mono {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1142,22 +1083,6 @@ p {
   letter-spacing: -0.8px;
 }
 
-.text-h3 {
-  font-size: 1.875rem;
-  line-height: 1.239;
-  letter-spacing: -0.4px;
-}
-
-.text-lg {
-  font-size: 1.125rem;
-  line-height: 1.75rem;
-}
-
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1166,16 +1091,6 @@ p {
 .text-base {
   font-size: 1rem;
   line-height: 1.5rem;
-}
-
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
-}
-
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
 }
 
 .font-semibold {
@@ -1190,24 +1105,12 @@ p {
   font-weight: 400;
 }
 
-.font-light {
-  font-weight: 300;
-}
-
-.font-thin {
-  font-weight: 100;
-}
-
 .uppercase {
   text-transform: uppercase;
 }
 
 .capitalize {
   text-transform: capitalize;
-}
-
-.italic {
-  font-style: italic;
 }
 
 .leading-none {
@@ -1236,39 +1139,14 @@ p {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.text-white {
-  --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity));
-}
-
 .text-heading {
   --tw-text-opacity: 1;
   color: rgb(42 52 62 / var(--tw-text-opacity));
 }
 
-.text-red-600 {
+.text-white {
   --tw-text-opacity: 1;
-  color: rgb(220 38 38 / var(--tw-text-opacity));
-}
-
-.text-green-600 {
-  --tw-text-opacity: 1;
-  color: rgb(22 163 74 / var(--tw-text-opacity));
-}
-
-.text-green-700 {
-  --tw-text-opacity: 1;
-  color: rgb(21 128 61 / var(--tw-text-opacity));
-}
-
-.text-emerald-700 {
-  --tw-text-opacity: 1;
-  color: rgb(4 120 87 / var(--tw-text-opacity));
-}
-
-.text-emerald-600 {
-  --tw-text-opacity: 1;
-  color: rgb(5 150 105 / var(--tw-text-opacity));
+  color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
 .text-red-500 {
@@ -1352,12 +1230,12 @@ p {
   transition-duration: 500ms;
 }
 
-.duration-1000 {
-  transition-duration: 1000ms;
-}
-
 .duration-150 {
   transition-duration: 150ms;
+}
+
+.duration-1000 {
+  transition-duration: 1000ms;
 }
 
 .ease-out {
@@ -1657,18 +1535,6 @@ html::selection {
 
 .dark .dark\:bg-dark\/90 {
   background-color: rgb(31 33 35 / 0.9);
-}
-
-.dark .dark\:bg-dark\/80 {
-  background-color: rgb(31 33 35 / 0.8);
-}
-
-.dark .dark\:bg-dark\/50 {
-  background-color: rgb(31 33 35 / 0.5);
-}
-
-.dark .dark\:bg-dark\/60 {
-  background-color: rgb(31 33 35 / 0.6);
 }
 
 .dark .dark\:bg-opacity-90 {
