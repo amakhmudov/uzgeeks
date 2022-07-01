@@ -50,7 +50,10 @@ module.exports = {
         ],
       },
       colors: {
-        brand: "#2bc1c5",
+        brand: {
+          DEFAULT: "#2bc1c5",
+          dark: "#223e3f",
+        },
         heading: "#2a343e",
         body: {
           DEFAULT: "#6d6d6d",

@@ -15,6 +15,7 @@
   </head>
 
   <body
+    x-ref="body"
     x-data="{'darkMode': false, 'menuOpen' : false, 'scrolledTop' : false}"
     x-init="darkMode = JSON.parse(localStorage.getItem('darkMode'));
             $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)));
@@ -53,10 +54,83 @@
             </nav>
 
             <ul class="flex items-center space-x-6">
-              <li class="hidden">
-                <button class="rounded-full border border-brand px-6 py-3 uppercase leading-none tracking-widest text-brand">Login</button>
+              <li x-data="{isOpen: false, isLogged: false}" class="relative">
+                <template x-if="!isLogged">
+                  <button x-on:click="isOpen = true, $refs.body.classList.add('overflow-hidden')" class="text-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </button>
+                </template>
+
+                <template x-if="!isLogged">
+                  <div x-cloak x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed !inset-0 z-10 flex h-full w-full overflow-y-auto overscroll-contain bg-brand-dark/80">
+                    <div class="sm-down:max-w-11/12 relative m-auto w-full max-w-md rounded-lg bg-white px-8 shadow-xl">
+                      <button @click="isOpen = false, $refs.body.classList.remove('overflow-hidden')" class="absolute top-1 right-1 flex h-10 w-10 items-center justify-center focus:outline-none">
+                        <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M17.4.614c-.52-.52-1.36-.52-1.88 0L9 7.121 2.48.6C1.96.08 1.12.08.6.6c-.52.52-.52 1.36 0 1.88L7.12 9 .6 15.52c-.52.52-.52 1.36 0 1.88.52.52 1.36.52 1.88 0L9 10.88l6.52 6.52c.52.52 1.36.52 1.88 0 .52-.52.52-1.36 0-1.88L10.88 9l6.52-6.52a1.336 1.336 0 000-1.867z" fill="currentColor" />
+                        </svg>
+                      </button>
+
+                      <p class="mt-8 text-center text-h3 font-normal text-body-dark">Tizimga kirish!</p>
+
+                      <form class="my-8 space-y-10">
+                        <div class="space-y-3">
+                          <input type="text" name="signin-phone" id="signin-phone" class="w-full rounded border px-3 py-2.5 text-sm" placeholder="Email" />
+                          <input type="password" name="signin-phone" id="signin-phone" class="w-full rounded border px-3 py-2.5 text-sm" placeholder="Parol" />
+
+                          <button x-on:click.prevent="$component('reset-password-popup').isOpen = true, isOpen = false" class="text-brand underline hover:no-underline">Parolni tiklash</button>
+                        </div>
+
+                        <div class="flex space-x-3">
+                          <button type="button" @click="" class="w-full rounded border bg-white p-3 transition hover:opacity-90">Ro'yhatdan o'tish</button>
+                          <button type="button" class="w-full rounded bg-brand p-3 text-white transition hover:opacity-90">Kirish</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </template>
+
+                <template x-if="isLogged">
+                  <button x-on:click="isOpen = ! isOpen" class="text-brand">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </button>
+                </template>
+
+                <template x-if="isLogged">
+                  <ul x-cloak x-show="isOpen" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="absolute top-full right-0 w-52 divide-y divide-gray-100 rounded border bg-white py-2 shadow-lg dark:divide-white/10 dark:border-dark dark:bg-dark-light">
+                    <li>
+                      <a href="#" class="flex items-center space-x-2 p-3 text-body transition hover:bg-gray-100 dark:text-white dark:hover:bg-dark/60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" />
+                        </svg>
+                        <span>Shahsiy ma'lumotlar</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#" class="flex items-center space-x-2 p-3 text-body transition hover:bg-gray-100 dark:text-white dark:hover:bg-dark/60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <span>Bildirishnomalar</span>
+                      </a>
+                    </li>
+
+                    <li>
+                      <a href="#" class="flex items-center space-x-2 p-3 text-body transition hover:bg-gray-100 dark:text-white dark:hover:bg-dark/60">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>Chiqish</span>
+                      </a>
+                    </li>
+                  </ul>
+                </template>
               </li>
-              <li class="hidden">
+              <li>
                 <svg width="1" height="20" fill="none" xmlns="http://www.w3.org/2000/svg" class="opacity-20">
                   <path stroke="currentColor" d="M.5 20V0" />
                 </svg>
@@ -72,25 +146,6 @@
                       <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                     </svg>
                   </button>
-
-                  <ul x-cloak x-show="isOpen1" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="absolute top-full right-0 w-40 rounded border bg-white py-2 shadow-lg dark:border-dark dark:bg-dark-light">
-                    <li>
-                      <button x-on:click="darkMode = false, isOpen = false" x-bind:class="darkMode ? '' : 'text-brand'" class="flex w-full items-center space-x-2 py-2 px-3 font-medium transition hover:bg-gray-100 dark:hover:bg-dark/60">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
-                        <span>Light</span>
-                      </button>
-                    </li>
-                    <li>
-                      <button x-on:click="darkMode = true, isOpen = false" x-bind:class="darkMode ? 'text-brand' : ''" class="flex w-full items-center space-x-2 py-2 px-3 font-medium transition hover:bg-gray-100 dark:hover:bg-dark/60">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                        </svg>
-                        <span>Dark</span>
-                      </button>
-                    </li>
-                  </ul>
                 </div>
               </li>
               <li class="sm:hidden">
@@ -647,7 +702,7 @@
           hours: "00",
           minutes: "00",
           seconds: "00",
-          endTime: new Date("May 28, 2022 14:00:00 GMT+05").getTime(),
+          endTime: new Date("July 28, 2022 14:00:00 GMT+05").getTime(),
           now: new Date().getTime(),
           timeLeft: 0,
           countdown: function () {
