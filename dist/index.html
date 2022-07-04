@@ -54,7 +54,7 @@
             </nav>
 
             <ul class="flex items-center space-x-6">
-              <li x-data="{isOpen: false, isLogged: false}" class="relative">
+              <li x-data="{isOpen: false, isLogged: true}" class="relative">
                 <template x-if="!isLogged">
                   <button x-on:click="isOpen = true, $refs.body.classList.add('overflow-hidden')" class="text-brand">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -64,29 +64,90 @@
                 </template>
 
                 <template x-if="!isLogged">
-                  <div x-cloak x-show="isOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed !inset-0 z-10 flex h-full w-full overflow-y-auto overscroll-contain bg-brand-dark/80">
-                    <div class="sm-down:max-w-11/12 relative m-auto w-full max-w-md rounded-lg bg-white px-8 shadow-xl">
-                      <button @click="isOpen = false, $refs.body.classList.remove('overflow-hidden')" class="absolute top-1 right-1 flex h-10 w-10 items-center justify-center focus:outline-none">
-                        <svg width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M17.4.614c-.52-.52-1.36-.52-1.88 0L9 7.121 2.48.6C1.96.08 1.12.08.6.6c-.52.52-.52 1.36 0 1.88L7.12 9 .6 15.52c-.52.52-.52 1.36 0 1.88.52.52 1.36.52 1.88 0L9 10.88l6.52 6.52c.52.52 1.36.52 1.88 0 .52-.52.52-1.36 0-1.88L10.88 9l6.52-6.52a1.336 1.336 0 000-1.867z" fill="currentColor" />
+                  <div x-cloak x-show="isOpen" x-on:keyup.escape.window="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="fixed !inset-0 z-10 flex h-full w-full overflow-y-auto bg-heading/95 dark:bg-dark/90 dark:text-body-light">
+                    <div x-data="{loginTab: 'isLogin'}" class="relative m-auto w-full max-w-[460px] rounded-lg bg-white p-6 shadow-lg dark:bg-dark-light/90 dark:text-body-light">
+                      <button x-on:click="isOpen = false, loginTab = 'isLogin', $refs.body.classList.remove('overflow-hidden')" class="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded outline-none transition hover:bg-brand hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14.828" height="14.828">
+                          <g transform="translate(-660.586 -213.586)">
+                            <path d="M662 215l12 12m0-12l-12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"></path>
+                          </g>
                         </svg>
                       </button>
 
-                      <p class="mt-8 text-center text-h3 font-normal text-body-dark">Tizimga kirish!</p>
+                      <div x-cloak x-show="loginTab === 'isLogin'" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 -translate-y-0">
+                        <div class="space-y-6">
+                          <p class="text-center text-2xl font-normal text-heading dark:text-white">Tizimga kirish!</p>
 
-                      <form class="my-8 space-y-10">
-                        <div class="space-y-3">
-                          <input type="text" name="signin-phone" id="signin-phone" class="w-full rounded border px-3 py-2.5 text-sm" placeholder="Email" />
-                          <input type="password" name="signin-phone" id="signin-phone" class="w-full rounded border px-3 py-2.5 text-sm" placeholder="Parol" />
+                          <form id="login-f" class="space-y-3 text-sm">
+                            <p id="login-f__error-message" class="hidden font-medium text-red-500">Iltimos, ma'lumotlarni tekshirib kiriting.</p>
+                            <p id="login-f__success-message" class="hidden font-medium text-brand">Tabriklaymiz, hammasi yahshi o'tti!</p>
 
-                          <button x-on:click.prevent="$component('reset-password-popup').isOpen = true, isOpen = false" class="text-brand underline hover:no-underline">Parolni tiklash</button>
+                            <input type="text" name="login-f-__phone" id="login-f-__phone" class="w-full rounded border px-4 py-3 outline-none dark:border-white/10 dark:bg-transparent" placeholder="Email" />
+                            <input type="password" name="login-f__password" id="login-f__password" class="w-full rounded border px-4 py-3 outline-none dark:border-white/10 dark:bg-transparent" placeholder="Parol" />
+
+                            <p class="flex space-x-2">
+                              <span>Parolni unutdingizmi?</span>
+                              <button x-on:click.prevent="loginTab = 'isPasswordReset'" class="text-brand underline hover:no-underline">Parolni tiklash</button>
+                            </p>
+
+                            <div class="!mt-6 flex space-x-3">
+                              <button type="button" x-on:click="loginTab = 'isRegister'" class="w-full rounded border bg-white p-3 transition hover:opacity-90 hover:shadow-lg dark:border-white/10 dark:bg-transparent">Ro'yhatdan o'tish</button>
+                              <button type="button" class="w-full rounded bg-brand p-3 text-white transition hover:opacity-90 hover:shadow-xl">Kirish</button>
+                            </div>
+                          </form>
                         </div>
+                      </div>
 
-                        <div class="flex space-x-3">
-                          <button type="button" @click="" class="w-full rounded border bg-white p-3 transition hover:opacity-90">Ro'yhatdan o'tish</button>
-                          <button type="button" class="w-full rounded bg-brand p-3 text-white transition hover:opacity-90">Kirish</button>
+                      <div x-cloak x-show="loginTab === 'isRegister'" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 -translate-y-0">
+                        <div class="space-y-6">
+                          <p class="relative sm:text-center">
+                            <button x-on:click="loginTab = 'isLogin'" class="flex flex-shrink-0 -translate-y-1/2 items-center space-x-1 text-brand sm:absolute sm:top-1/2 sm:left-0">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                              </svg>
+                              <span class="mx-auto">Ortga</span>
+                            </button>
+                            <span class="text-2xl font-normal text-heading dark:text-white">Ro'yhattan o'tish!</span>
+                          </p>
+
+                          <form id="register-f" class="space-y-3 text-sm">
+                            <p id="register-f__error-message" class="hidden font-medium text-red-500">Iltimos, ma'lumotlarni tekshirib kiriting.</p>
+                            <p id="register-f__success-message" class="hidden font-medium text-brand">Tabriklaymiz, hammasi yahshi o'tti!</p>
+
+                            <input type="text" name="register-f__name" id="register-f__name" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Ism*" />
+                            <input type="text" name="register-f__email" id="register-f__email" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Email*" />
+                            <input type="password" name="register-f__password" id="register-f__password" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Password*" />
+                            <input type="password" name="register-f__password-confirm" id="register-f__password-confirm" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Password confirm*" />
+
+                            <button class="w-full rounded bg-brand p-3 text-white outline-none transition hover:shadow-lg">Ro'yhattan o'tish</button>
+                          </form>
                         </div>
-                      </form>
+                      </div>
+
+                      <div x-cloak x-show="loginTab === 'isPasswordReset'" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 -translate-y-0">
+                        <div class="space-y-6">
+                          <p class="relative sm:text-center">
+                            <button x-on:click="loginTab = 'isLogin'" class="flex flex-shrink-0 -translate-y-1/2 items-center space-x-1 text-brand sm:absolute sm:top-1/2 sm:left-0">
+                              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+                              </svg>
+                              <span class="mx-auto">Ortga</span>
+                            </button>
+                            <span class="text-2xl font-normal text-heading dark:text-white">Parolni o'zgartirish!</span>
+                          </p>
+
+                          <form id="password-reset-f" class="space-y-3 text-sm">
+                            <p id="password-reset-f__error-message" class="hidden font-medium text-red-500">Iltimos, ma'lumotlarni tekshirib kiriting.</p>
+                            <p id="password-reset-f__success-message" class="hidden font-medium text-brand">Tabriklaymiz, hammasi yahshi o'tti!</p>
+
+                            <p class="text-center">Email manzilingizni yozing, u yerga parolni qayta o'zgartirish haqida ma'lumotlarni yuboramiz!</p>
+
+                            <input type="text" name="password-reset-f__old-password" id="password-reset-f__email" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Email*" />
+
+                            <button class="w-full rounded bg-brand p-3 text-white outline-none transition hover:shadow-lg">Parolni o'zgartirish</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </template>
@@ -100,7 +161,7 @@
                 </template>
 
                 <template x-if="isLogged">
-                  <ul x-cloak x-show="isOpen" x-on:click.outside="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4" class="absolute top-full right-0 w-52 divide-y divide-gray-100 rounded border bg-white py-2 shadow-lg dark:divide-white/10 dark:border-dark dark:bg-dark-light">
+                  <ul x-cloak x-show="isOpen" x-on:keyup.escape.window="isOpen = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0 translate-y-4" x-transition:enter-end="opacity-100 translate-y-0" class="absolute top-full right-0 w-52 divide-y divide-gray-100 rounded border bg-white py-2 shadow-lg dark:divide-white/10 dark:border-dark dark:bg-dark-light">
                     <li>
                       <a href="#" class="flex items-center space-x-2 p-3 text-body transition hover:bg-gray-100 dark:text-white dark:hover:bg-dark/60">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
@@ -189,7 +250,7 @@
                   <li class="flex flex-col justify-center"><span x-text="seconds" class="text-h2 text-heading dark:text-white sm:text-h1">36</span>soniya qoldi</li>
                 </ul>
 
-                <button x-on:click="isRegistration = true" class="group inline-flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white outline-none transition duration-500 hover:translate-y-1 hover:shadow-lg dark:border-dark">
+                <button x-on:click="isRegistration = true, $refs.body.classList.add('overflow-hidden')" class="group inline-flex items-center space-x-3 rounded-full border-b-4 bg-brand px-8 py-4 text-white outline-none transition duration-500 hover:translate-y-1 hover:shadow-lg dark:border-dark">
                   <span class="text-sm uppercase tracking-widest">Eventda qatnashing</span>
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
@@ -199,9 +260,9 @@
             </div>
             <span class="relative !mt-40 block h-20 w-px bg-body/20 dark:bg-white/10"></span>
 
-            <div x-cloak x-show="isRegistration" x-on:keyup.escape.window="isRegistration = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-50 !m-0 flex h-screen w-screen items-center justify-center overflow-y-auto bg-heading/95 dark:bg-dark/90">
+            <div x-cloak x-show="isRegistration" x-on:keyup.escape.window="isRegistration = false" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" class="fixed inset-0 z-50 !m-0 flex h-screen w-screen items-center justify-center overflow-y-auto bg-heading/95 dark:bg-dark/90">
               <div class="relative m-auto w-full max-w-[500px] rounded-lg bg-white p-6 shadow-lg dark:bg-dark-light/90 dark:text-body-light">
-                <button x-on:click="isRegistration = false" class="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded outline-none transition hover:bg-brand hover:text-white">
+                <button x-on:click="isRegistration = false, $refs.body.classList.remove('overflow-hidden')" class="absolute right-1 top-1 flex h-6 w-6 items-center justify-center rounded outline-none transition hover:bg-brand hover:text-white">
                   <svg xmlns="http://www.w3.org/2000/svg" width="14.828" height="14.828">
                     <g transform="translate(-660.586 -213.586)">
                       <path d="M662 215l12 12m0-12l-12 12" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.5"></path>
@@ -210,17 +271,17 @@
                 </button>
 
                 <div class="space-y-3">
-                  <p class="text-center text-2xl font-normal text-heading dark:text-white">Ro'yhatdan o'tish</p>
+                  <p class="text-center text-2xl font-normal text-heading dark:text-white">Eventga ro'yhatdan o'tish</p>
 
-                  <form id="register-f" class="space-y-3 text-sm">
-                    <p id="error-message" class="hidden font-medium text-red-500">Iltimos, to'ldirish lozim bo'lgan ma'lumotlarni kiriting.</p>
-                    <p id="success-message" class="hidden font-medium text-brand">Tabriklaymiz, Siz ro'yxatdan o'tdingiz!</p>
+                  <form id="event-f" class="space-y-3 text-sm">
+                    <p id="event-f__error-message" class="hidden font-medium text-red-500">Iltimos, ma'lumotlarni tekshirib kiriting.</p>
+                    <p id="event-f__success-message" class="hidden font-medium text-brand">Tabriklaymiz, hammasi yahshi o'tti!</p>
 
-                    <input type="text" name="register-f__name" id="register-f__name" class="w-full rounded border px-4 py-3 text-sm outline-none" placeholder="Ism*" />
-                    <input type="text" name="register-f__email" id="register-f__email" class="w-full rounded border px-4 py-3 text-sm outline-none" placeholder="Email*" />
-                    <input type="text" name="register-f__phone" id="register-f__phone" class="w-full rounded border px-4 py-3 text-sm outline-none" placeholder="Phone*" />
+                    <input type="text" name="event-f__name" id="event-f__name" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Ism*" />
+                    <input type="text" name="event-f__email" id="event-f__email" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Email*" />
+                    <input type="text" name="event-f__phone" id="event-f__phone" class="w-full rounded border px-4 py-3 text-sm outline-none dark:border-white/10 dark:bg-transparent" placeholder="Phone*" />
 
-                    <button class="w-full rounded bg-brand p-3 text-base text-white outline-none transition hover:shadow-lg">Jo'natish</button>
+                    <button class="w-full rounded bg-brand p-3 text-white outline-none transition hover:shadow-lg">Jo'natish</button>
                   </form>
                 </div>
               </div>
